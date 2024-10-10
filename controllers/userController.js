@@ -88,18 +88,18 @@ const loginUser = async (req, res) => {
 
 // Upload assignment
 const uploadAssignment = async (req, res) => {
-  const { userId, task, admin } = req.body;
+  const { userId, task, adminId } = req.body;
 
   // Validate input
   const validationError = validateInput(
     req.body,
-    ["userId", "task", "admin"],
+    ["userId", "task", "adminId"],
     res
   );
   if (validationError) return;
 
   try {
-    const assignment = new Assignment({ userId, task, admin });
+    const assignment = new Assignment({ userId, task, adminId });
     await assignment.save();
 
     res.status(201).json({ message: "Assignment uploaded successfully!" });
